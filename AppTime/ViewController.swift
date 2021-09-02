@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var blueEarthIMG: UIImageView!
     
     var imageNumber = 0
+    var msgNum = 0
+    var messages = ["RiseDigital", "risedigital.org", "rise.com","rise.net", "RISE", "The Rise", "RISE UP"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,13 @@ class ViewController: UIViewController {
         if imageNumber == 6 {
             imageNumber = 0
         }
+        let msgName = messages[msgNum]
+        riseLabel.text = msgName
+        msgNum = msgNum + 1
+        if msgNum == messages.count {
+            msgNum = 0
+        }
+        
 
         //        let msg1 = "RISE"
         //        let msg2 = "The RISE"
