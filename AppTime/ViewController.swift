@@ -11,8 +11,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var blueEarthIMG: UIImageView!
     
-    var imageNumber = 0
-    var msgNum = 0
     var messages = ["RiseDigital", "risedigital.org", "rise.com","rise.net", "RISE", "The Rise", "RISE UP"]
     
     override func viewDidLoad() {
@@ -21,21 +19,9 @@ class ViewController: UIViewController {
     }
     @IBAction func firstButtonPressed(_ sender: Any) {
 //        let imageName = "image" + String(imageNumber)
-        let randomImgNum = Int.random(in: 1...5)
-        let imageName = "image\(randomImgNum)"
-        blueEarthIMG.image = UIImage(named: imageName)
-        imageNumber = imageNumber + 1
-        if imageNumber == 6 {
-            imageNumber = 0
-        }
-        
-        let randomMsg = messages[Int.random(in: 0...messages.count-1)]
-        let msgName = messages[msgNum]
-        riseLabel.text = randomMsg
-        msgNum = msgNum + 1
-        if msgNum == messages.count {
-            msgNum = 0
-        }
+        blueEarthIMG.image = UIImage(named: "image\(Int.random(in: 1...5))")
+        riseLabel.text = messages[Int.random(in: 0...messages.count-1)]
+
         
 
         //        let msg1 = "RISE"
