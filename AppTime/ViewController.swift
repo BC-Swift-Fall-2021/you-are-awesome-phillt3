@@ -21,14 +21,17 @@ class ViewController: UIViewController {
     }
     @IBAction func firstButtonPressed(_ sender: Any) {
 //        let imageName = "image" + String(imageNumber)
-        let imageName = "image\(imageNumber)"
+        let randomImgNum = Int.random(in: 1...5)
+        let imageName = "image\(randomImgNum)"
         blueEarthIMG.image = UIImage(named: imageName)
         imageNumber = imageNumber + 1
         if imageNumber == 6 {
             imageNumber = 0
         }
+        
+        let randomMsg = messages[Int.random(in: 0...messages.count-1)]
         let msgName = messages[msgNum]
-        riseLabel.text = msgName
+        riseLabel.text = randomMsg
         msgNum = msgNum + 1
         if msgNum == messages.count {
             msgNum = 0
