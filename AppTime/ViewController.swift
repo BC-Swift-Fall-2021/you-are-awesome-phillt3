@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var riseLabel: UILabel!
@@ -13,31 +14,52 @@ class ViewController: UIViewController {
     
     var imageNumber = -1
     var messageNumber = -1
+    var soundNumber = -1
     var totalNumberOfImages = 5
+    var totalNumberOfSounds = 4
+    var audioPlayer: AVAudioPlayer!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    func playSound(name: String){
+        if let sound = NSDataAsset(name: name) {
+            do {
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            } catch {
+                print("Error \(error.localizedDescription)")
+            }
+        } else {
+            print("Could not read data file for sound")
+        }
+    }
+    
+    func nonRepeatingRandom(originalNumber: Int, upperLimit: Int) -> Int {
+        var newNumber: Int
+        repeat {
+            newNumber = Int.random(in: 0 ... upperLimit)
+        } while originalNumber == newNumber
+        return newNumber
+    }
+    
     @IBAction func firstButtonPressed(_ sender: Any) {
         let messages = ["RiseDigital", "risedigital.org",
                         "rise.com", "rise.net", "RISE",
                         "The Rise", "RISE UP"]
-        var newMessageNumber: Int
-        repeat {
-            newMessageNumber = Int.random(in: 0...messages.count-1)
-        } while messageNumber == newMessageNumber
-        messageNumber = newMessageNumber
+        messageNumber = nonRepeatingRandom(originalNumber: messageNumber, upperLimit: messages.count - 1)
         riseLabel.text = messages[messageNumber]
         
-        var newImageNumber: Int
-        repeat {
-            newImageNumber = Int.random(in: 0 ... totalNumberOfImages)
-        } while imageNumber == newImageNumber
-        imageNumber = newImageNumber
+        imageNumber = nonRepeatingRandom(originalNumber: imageNumber, upperLimit: totalNumberOfImages - 1)
         blueEarthIMG.image = UIImage(named: "image\(imageNumber)")
         
+
+        soundNumber = nonRepeatingRandom(originalNumber: soundNumber, upperLimit: totalNumberOfSounds - 1)
+        print("*** The new sound number is \(soundNumber)")
+        playSound(name: "sound\(soundNumber)")
     }
 }
 
